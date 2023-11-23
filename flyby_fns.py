@@ -35,9 +35,8 @@ def checkinit(s_x0, s_y0, v_x0, v_y0, planet_radius):
         raise ValueError('Please enter a positive velocity, in the direction towards the planet.')
     else:
         pass
-
+    
 def sc_vel_pos_change(a_x, a_y, v_x, v_y, time_step): 
-
     '''
     Takes in instantaneous acceleration and velocity x&y components at a certain timestep
     Returns the delta(change) of x-y position vectors and velocity vectors to track change over time.
@@ -79,16 +78,15 @@ def get_traj(s_x0, s_y0, v_x0, v_y0, time_step, total_time, planet_mass, planet_
 
     for i in range(1, len(time)):
 
-        a_x, a_y = grav_acc(pos[i-1, 0], pos[i-1, 1], planet_mass)
         
-        acc[i, 0] = a_x 
-        acc[i, 1] = a_y 
-        
-        ds_x, ds_y, dv_x, dv_y = sc_vel_pos_change(a_x, a_y, vel[i-1, 0], vel[i-1, 1], time_step)
+        ds_x, ds_y, dv_x, dv_y = sc_vel_pos_change(acc[i-1, 0], acc[i-1, 1], vel[i-1, 0], vel[i-1, 1], time_step)
         
         vel[i, 0] = vel[i-1, 0] + dv_x
         vel[i, 1] = vel[i-1, 1] + dv_y
         pos[i, 0] = pos[i-1, 0] + ds_x
         pos[i, 1] = pos[i-1, 1] + ds_y
         
+        acc[i, 0], acc[i, 1] = grav_acc(pos[i, 0], pos[i, 1], planet_mass)
+
+    
     return time, acc, vel, pos
