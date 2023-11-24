@@ -90,3 +90,4 @@ def get_traj(s_x0, s_y0, v_x0, v_y0, time_step, total_time, planet_mass, planet_
 
     
     return time, acc, vel, pos
+
