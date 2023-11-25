@@ -91,3 +91,25 @@ def get_traj(s_x0, s_y0, v_x0, v_y0, time_step, total_time, planet_mass, planet_
     
     return time, acc, vel, pos
 
+def mag(x, y):
+    """
+    Calculates the magnitude of two arrays
+    
+    input = x (array), y (array)
+    output = arr (array)
+    """
+    arr = np.ones(len(x)) * np.nan
+    for i in range(len(x)):
+        arr[i] = math.sqrt(x[i]**2 + y[i]**2)
+    
+    return arr
+
+def find_lowest_altitude(x):
+    """
+    finds index of smallest number
+    
+    input: x (array)
+    output: np.argmin(x) (int)
+    """
+    
+    return np.argmin(x)
